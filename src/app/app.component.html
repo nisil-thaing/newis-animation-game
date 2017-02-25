@@ -1,3 +1,11 @@
-<h1>
-  {{title}}
-</h1>
+<div [ngClass]="{ 'step1-is-finished': isFinished.step1 }">
+  <div class="logo" [ngClass]="{ 'col-sm-3 hidden-xs hidden-sm': isFinished.step1 }">
+    <img [class]="logoClass" id="logo" src="{{ settings.assetsPath }}/imgs/newis-logo.png" *ngIf="step == 'showLogo'" />
+  </div>
+  <div class="angel" [ngClass]="{ 'col-md-9 hidden-xs hidden-sm': isFinished.step1 }">
+    <img [class]="whiteAngelClass" id="white-angel" src="{{ settings.assetsPath }}/imgs/white-angel.png" *ngIf="isFinished.step1">
+  </div>
+  <div class="heart">
+    <img [class]="heartFrameClass" id="heart-frame" src="{{ settings.assetsPath }}/imgs/heart-frame.png" *ngIf="isFinished.step1">
+  </div>
+</div>

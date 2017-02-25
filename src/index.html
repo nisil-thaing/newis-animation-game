@@ -7,8 +7,26 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link rel="stylesheet" type="text/css" href="./assets/styles/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./assets/styles/css/style.css">
 </head>
 <body>
-  <app-root>Loading...</app-root>
+  <div app-root id="wrapper">Loading...</div>
+
+  <div style="display: none">
+    <audio id="my-audio" controls>
+      <source src="./assets/music/background.ogg" type="audio/ogg">
+    </audio>
+    <audio id="my-audio-1" controls>
+      <source src="./assets/music/congratulation.ogg" type="audio/ogg">
+    </audio>
+    <audio id="my-audio-2" controls>
+      <source src="./assets/music/wheel.ogg" type="audio/ogg">
+    </audio>
+  </div>
+
+  <script type="text/javascript" src="./assets/libs/jquery/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="./assets/libs/bootstrap/bootstrap.min.js"></script>
 </body>
 </html>
