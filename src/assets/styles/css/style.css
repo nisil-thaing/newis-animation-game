@@ -79,9 +79,9 @@
   display: inline-flex;
   align-items: center;
 
-  -webkit-animation: movegifts 5s linear infinite;
-  -moz-animation: movegifts 5s linear infinite;
-  -o-animation: movegifts 5s linear infinite;
+  -webkit-animation: movegifts 2s linear infinite;
+  -moz-animation: movegifts 2s linear infinite;
+  -o-animation: movegifts 2s linear infinite;
 }
 
 #wrapper > div.step1-is-finished .gifts.paused {
@@ -93,25 +93,25 @@
 }
 
 @-webkit-keyframes movegifts {
-  0% {margin-left: -850px;}
+  0% {margin-left: -650px;}
   /*25% {margin-left: 1000px;}
   50% {margin-left: 500px;}
   75% {margin-left: 250px;}*/
-  100% {margin-left: 2000px;}
+  100% {margin-left: 800px;}
 }
 @-moz-keyframes movegifts {
-  0% {margin-left: -850px;}
+  0% {margin-left: -650px;}
   /*25% {margin-left: 1000px;}
   50% {margin-left: 500px;}
   75% {margin-left: 250px;}*/
-  100% {margin-left: 2000px;}
+  100% {margin-left: 800px;}
 }
 @-o-keyframes movegifts {
-  0% {margin-left: -850px;}
+  0% {margin-left: -650px;}
   /*25% {margin-left: 1000px;}
   50% {margin-left: 500px;}
   75% {margin-left: 250px;}*/
-  100% {margin-left: 2000px;}
+  100% {margin-left: 800px;}
 }
 
 #wrapper > div.step1-is-finished .angel #white-angel {

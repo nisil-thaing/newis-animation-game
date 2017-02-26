@@ -35,15 +35,16 @@ export class AppComponent {
 
   isGameStarted: boolean = false;
 
-  randomTime: number = 0;
+  randomGift: number = 0;
   isGamePaused: boolean = false;
   _renderer: Renderer;
+  lastGift: number = -1;
 
-  /*wheelState: any = {
+  wheelState: any = {
     '-webkit-animation': 'movegifts 5s linear infinite',
     '-moz-animation': 'movegifts 5s linear infinite',
     '-o-animation': 'movegifts 5s linear infinite'
-  };*/
+  };
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -56,41 +57,45 @@ export class AppComponent {
 
       let heartLeft = document.querySelector(".heart #heart-frame").getBoundingClientRect().left;
       let heartRight = document.querySelector(".heart #heart-frame").getBoundingClientRect().right;
+      this.randomGift = Math.floor(Math.random() * 5);
 
-      /*if (document.querySelector(".gifts #gift0")) { 
-        console.log(document.querySelector(".gifts #gift0").getBoundingClientRect().left);
-      }*/
-
-      setInterval(() => {
-        let gift0Left = document.querySelector(".gifts #gift0").getBoundingClientRect().left;
-        let gift0Right = document.querySelector(".gifts #gift0").getBoundingClientRect().right;
-
-        console.log(gift0Left, heartLeft);
-
-        if (gift0Left > heartLeft && gift0Left < heartRight) {
-          this.isGamePaused = true;
+      let itemArray = [
+        {
+          code: 'gift0',
+          remain: 100
+        },
+        {
+          code: 'gift1',
+          remain: 100
+        },
+        {
+          code: 'gift2',
+          remain: 100
+        },
+        {
+          code: 'gift3',
+          remain: 100
+        },
+        {
+          code: 'gift4',
+          remain: 100
         }
-      }, 200);
+      ];
 
-      // this.randomTime = Math.floor(Math.random() * 3) + 1  ;
-     /* setTimeout(() => {
-        this.isGamePaused = true;
-console.log(document.querySelector(".gifts #gift0").getBoundingClientRect().left);
+      let refreshId = setInterval(() => {
+        let gift0Left = document.querySelector(".gifts #" + itemArray[this.randomGift].code).getBoundingClientRect().left;
+        let gift0Right = document.querySelector(".gifts #" + itemArray[this.randomGift].code).getBoundingClientRect().right;
 
-      }, (this.randomTime * 7000));*/
+        console.log(this.randomGift, gift0Left, heartLeft, this.lastGift);
 
-      // this.wheelState = {
-      //   '-webkit-animation': 'movegifts 5s linear infinite',
-      //   '-moz-animation': 'movegifts 5s linear infinite',
-      //   '-o-animation': 'movegifts 5s linear infinite'
-      // };
-    
-      // setTimeout(() => {
-      //   this.wheelState = {
-      //     '-webkit-animation-play-state': 'paused', /* Safari 4.0 - 8.0 */
-      //     'animation-play-state': 'paused'
-      //   };
-      // }, (this.randomTime * 1000));
+        if (gift0Left > heartLeft + 200 && gift0Right < heartRight -200 && this.randomGift > this.lastGift) {
+          this.isGamePaused = true;
+          this.lastGift = this.randomGift;
+          clearInterval(refreshId);
+        } else {
+          this.lastGift--;
+        }
+      }, 300);
     }
   }
 
