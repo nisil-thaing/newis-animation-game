@@ -59,18 +59,67 @@
   height: inherit;
 }
 
-#wrapper > div.step1-is-finished .heart {
+#wrapper > div.step1-is-finished .heart, #wrapper > div.step1-is-finished .gifts {
   height: inherit;
   width: auto;
   position: relative;
 }
 
+#wrapper > div.step1-is-finished .heart {
+  z-index: 100;
+}
+
+#wrapper > div.step1-is-finished .gifts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: inherit;
+
+  display: inline-flex;
+  align-items: center;
+
+  -webkit-animation: movegifts 5s linear infinite;
+  -moz-animation: movegifts 5s linear infinite;
+  -o-animation: movegifts 5s linear infinite;
+}
+
+#wrapper > div.step1-is-finished .gifts.paused {
+  animation-play-state: paused !important;
+}
+
+#wrapper > div.step1-is-finished .gifts > img {
+  width: 250px;
+}
+
+@-webkit-keyframes movegifts {
+  0% {margin-left: -850px;}
+  /*25% {margin-left: 1000px;}
+  50% {margin-left: 500px;}
+  75% {margin-left: 250px;}*/
+  100% {margin-left: 2000px;}
+}
+@-moz-keyframes movegifts {
+  0% {margin-left: -850px;}
+  /*25% {margin-left: 1000px;}
+  50% {margin-left: 500px;}
+  75% {margin-left: 250px;}*/
+  100% {margin-left: 2000px;}
+}
+@-o-keyframes movegifts {
+  0% {margin-left: -850px;}
+  /*25% {margin-left: 1000px;}
+  50% {margin-left: 500px;}
+  75% {margin-left: 250px;}*/
+  100% {margin-left: 2000px;}
+}
+
 #wrapper > div.step1-is-finished .angel #white-angel {
   width: auto;
-  max-height: 300px;
+  max-height: 200px;
   position: absolute;
   right: 120px;
-  bottom: 150px;
+  bottom: 100px;
 }
 
 #wrapper > div.step1-is-finished .heart #heart-frame {

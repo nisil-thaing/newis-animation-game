@@ -8,4 +8,11 @@
   <div class="heart">
     <img [class]="heartFrameClass" id="heart-frame" src="{{ settings.assetsPath }}/imgs/heart-frame.png" *ngIf="isFinished.step1">
   </div>
+  <div class="gifts" [ngClass]="{ 'paused': isGamePaused }">
+    <img id="gift0" src="{{ settings.assetsPath }}/imgs/balloon_1.png" *ngIf="isGameStarted">
+    <img id="gift1" src="{{ settings.assetsPath }}/imgs/balloon_1.png" *ngIf="isGameStarted">
+    <img id="gift2" src="{{ settings.assetsPath }}/imgs/balloon_1.png" *ngIf="isGameStarted">
+    <img id="gift3" src="{{ settings.assetsPath }}/imgs/balloon_1.png" *ngIf="isGameStarted">
+    <img id="gift4" src="{{ settings.assetsPath }}/imgs/balloon_1.png" *ngIf="isGameStarted">
+  </div>
 </div>

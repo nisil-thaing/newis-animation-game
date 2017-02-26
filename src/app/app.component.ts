@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, Renderer } from '@angular/core';
 
 @Component({
   selector: '[app-root]',
@@ -30,6 +30,69 @@ export class AppComponent {
     step2: false,
     step3: false
   };
+
+  key: number;
+
+  isGameStarted: boolean = false;
+
+  randomTime: number = 0;
+  isGamePaused: boolean = false;
+  _renderer: Renderer;
+
+  /*wheelState: any = {
+    '-webkit-animation': 'movegifts 5s linear infinite',
+    '-moz-animation': 'movegifts 5s linear infinite',
+    '-o-animation': 'movegifts 5s linear infinite'
+  };*/
+
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    let keyCode = event.which || event.keyCode
+    if (keyCode === 13 || keyCode === 32) {
+      this.key = keyCode;
+      // console.log(this.key);
+      this.isGameStarted = true;
+      this.isGamePaused = false;
+
+      let heartLeft = document.querySelector(".heart #heart-frame").getBoundingClientRect().left;
+      let heartRight = document.querySelector(".heart #heart-frame").getBoundingClientRect().right;
+
+      /*if (document.querySelector(".gifts #gift0")) { 
+        console.log(document.querySelector(".gifts #gift0").getBoundingClientRect().left);
+      }*/
+
+      setInterval(() => {
+        let gift0Left = document.querySelector(".gifts #gift0").getBoundingClientRect().left;
+        let gift0Right = document.querySelector(".gifts #gift0").getBoundingClientRect().right;
+
+        console.log(gift0Left, heartLeft);
+
+        if (gift0Left > heartLeft && gift0Left < heartRight) {
+          this.isGamePaused = true;
+        }
+      }, 200);
+
+      // this.randomTime = Math.floor(Math.random() * 3) + 1  ;
+     /* setTimeout(() => {
+        this.isGamePaused = true;
+console.log(document.querySelector(".gifts #gift0").getBoundingClientRect().left);
+
+      }, (this.randomTime * 7000));*/
+
+      // this.wheelState = {
+      //   '-webkit-animation': 'movegifts 5s linear infinite',
+      //   '-moz-animation': 'movegifts 5s linear infinite',
+      //   '-o-animation': 'movegifts 5s linear infinite'
+      // };
+    
+      // setTimeout(() => {
+      //   this.wheelState = {
+      //     '-webkit-animation-play-state': 'paused', /* Safari 4.0 - 8.0 */
+      //     'animation-play-state': 'paused'
+      //   };
+      // }, (this.randomTime * 1000));
+    }
+  }
 
   constructor() {
     this.vid.playbackRate = 1;
@@ -72,4 +135,8 @@ export class AppComponent {
       }, 1000);
     }, 1000);
   }
+
+  /*runGameStyle() {
+    return this.wheelState;
+  }*/
 }
