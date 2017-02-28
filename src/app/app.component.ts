@@ -55,6 +55,9 @@ export class AppComponent {
       this.isGameStarted = true;
       this.isGamePaused = false;
 
+      (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.left = "0";
+
+
       let heartLeft = document.querySelector(".heart #heart-frame").getBoundingClientRect().left;
       let heartRight = document.querySelector(".heart #heart-frame").getBoundingClientRect().right;
       this.randomGift = Math.floor(Math.random() * 5);
@@ -82,20 +85,32 @@ export class AppComponent {
         }
       ];
 
-      let refreshId = setInterval(() => {
-        let gift0Left = document.querySelector(".gifts #" + itemArray[this.randomGift].code).getBoundingClientRect().left;
-        let gift0Right = document.querySelector(".gifts #" + itemArray[this.randomGift].code).getBoundingClientRect().right;
+      setTimeout(() => {
+        let refreshId = setInterval(() => {
+          let gift0Left = document.querySelector(".gifts #" + itemArray[this.randomGift].code).getBoundingClientRect().left;
+          let gift0Right = document.querySelector(".gifts #" + itemArray[this.randomGift].code).getBoundingClientRect().right;
 
-        console.log(this.randomGift, gift0Left, heartLeft, this.lastGift);
+          // console.log(this.randomGift, gift0Left, heartLeft, this.lastGift);
 
-        if (gift0Left > heartLeft + 200 && gift0Right < heartRight -200 && this.randomGift > this.lastGift) {
-          this.isGamePaused = true;
-          this.lastGift = this.randomGift;
-          clearInterval(refreshId);
-        } else {
-          this.lastGift--;
-        }
-      }, 300);
+          if (gift0Left > heartLeft + ((heartRight - heartLeft) / 4) && gift0Right < heartRight - ((heartRight - heartLeft) / 4) && this.randomGift > this.lastGift) {
+            this.isGamePaused = true;
+
+            let oOfHeartFrame = (heartRight + heartLeft) / 2;
+            let oOfGift = (gift0Right + gift0Left) / 2;
+            // let parentTransitionValue = 
+            // console.log(oOfHeartFrame, oOfGift);
+            setTimeout(() => {
+              (document.getElementById(itemArray[this.randomGift].code).parentElement).style.left = ((oOfHeartFrame - oOfGift)) + "px";
+            }, 500);
+
+            this.lastGift = this.randomGift;
+            // alert(this.lastGift);
+            clearInterval(refreshId);
+          } else {
+            this.lastGift--;
+          }
+        }, 1);
+      }, 5000);
     }
   }
 
