@@ -88,10 +88,6 @@
   animation-play-state: paused !important;
 }
 
-#wrapper > div.step1-is-finished .gifts > img {
-  width: 80%;
-}
-
 @-webkit-keyframes movegifts {
   0% {margin-left: -1000px;}
   /*25% {margin-left: 1000px;}
@@ -136,6 +132,10 @@
     max-width: 480px;
     transform: translate(-50%, -50%) !important;
   }
+
+  #wrapper > div.step1-is-finished .gifts > img {
+    width: 150px;
+  }
 }
 
 @media(min-width: 992px) {
@@ -143,6 +143,10 @@
     left: 0;
     max-width: 768px;
     transform: translateY(-50%) !important;
+  }
+
+  #wrapper > div.step1-is-finished .gifts > img {
+    width: 210px;
   }
 }
 

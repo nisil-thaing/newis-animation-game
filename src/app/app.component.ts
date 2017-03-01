@@ -46,80 +46,122 @@ export class AppComponent {
     '-o-animation': 'movegifts 5s linear infinite'
   };
 
+  itemArray = [];
+
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     let keyCode = event.which || event.keyCode
     if (keyCode === 13 || keyCode === 32) {
       this.key = keyCode;
-      // console.log(this.key);
-      this.isGameStarted = true;
-      this.isGamePaused = false;
 
       (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.left = "0";
 
-
       let heartLeft = document.querySelector(".heart #heart-frame").getBoundingClientRect().left;
       let heartRight = document.querySelector(".heart #heart-frame").getBoundingClientRect().right;
+
       this.randomGift = Math.floor(Math.random() * 5);
+      let giftRemaining = this.itemArray.filter((item) => {
+        return item.remain > 0;
+      });
 
-      let itemArray = [
-        {
-          code: 'gift0',
-          remain: 100
-        },
-        {
-          code: 'gift1',
-          remain: 100
-        },
-        {
-          code: 'gift2',
-          remain: 100
-        },
-        {
-          code: 'gift3',
-          remain: 100
-        },
-        {
-          code: 'gift4',
-          remain: 100
-        }
-      ];
+      if (giftRemaining.length > 0) {
 
-      setTimeout(() => {
-        let refreshId = setInterval(() => {
-          let gift0Left = document.querySelector(".gifts #" + itemArray[this.randomGift].code).getBoundingClientRect().left;
-          let gift0Right = document.querySelector(".gifts #" + itemArray[this.randomGift].code).getBoundingClientRect().right;
+        this.randomGift = this.getRandomGift();
 
-          // console.log(this.randomGift, gift0Left, heartLeft, this.lastGift);
+        this.isGameStarted = true;
+        this.isGamePaused = false;
 
-          if (gift0Left > heartLeft + ((heartRight - heartLeft) / 4) && gift0Right < heartRight - ((heartRight - heartLeft) / 4) && this.randomGift > this.lastGift) {
-            this.isGamePaused = true;
+        setTimeout(() => {
+          let refreshId = setInterval(() => {
+            let gift0Left = document.querySelector(".gifts #" + this.itemArray[this.randomGift].code).getBoundingClientRect().left;
+            let gift0Right = document.querySelector(".gifts #" + this.itemArray[this.randomGift].code).getBoundingClientRect().right;
 
-            let oOfHeartFrame = (heartRight + heartLeft) / 2;
-            let oOfGift = (gift0Right + gift0Left) / 2;
-            // let parentTransitionValue = 
-            // console.log(oOfHeartFrame, oOfGift);
-            setTimeout(() => {
-              (document.getElementById(itemArray[this.randomGift].code).parentElement).style.left = ((oOfHeartFrame - oOfGift)) + "px";
-            }, 500);
+            if (gift0Left > heartLeft + ((heartRight - heartLeft) / 4) && gift0Right < heartRight - ((heartRight - heartLeft) / 4) && this.randomGift > this.lastGift) {
+              this.isGamePaused = true;
 
-            this.lastGift = this.randomGift;
-            // alert(this.lastGift);
-            clearInterval(refreshId);
-          } else {
-            this.lastGift--;
-          }
-        }, 1);
-      }, 5000);
+              let oOfHeartFrame = (heartRight + heartLeft) / 2;
+              let oOfGift = (gift0Right + gift0Left) / 2;
+
+              setTimeout(() => {
+                (document.getElementById(this.itemArray[this.randomGift].code).parentElement).style.left = ((oOfHeartFrame - oOfGift)) + "px";
+              }, 500);
+
+              this.lastGift = this.randomGift;
+              this.itemArray[this.randomGift].remain--;
+
+              clearInterval(refreshId);
+            } else {
+              this.lastGift--;
+            }
+          }, 1);
+        }, 5000);
+      } else {
+        this.isGameStarted = false;
+        this.isGamePaused = true;
+
+        alert("Het qua cmnr! Cut!");
+      }
     }
   }
 
   constructor() {
+    this.itemArray = [
+      {
+        code: 'gift0',
+        assetPath: '/imgs/bo-noi.png',
+        remain: 1,
+        showName: 'Bộ nồi thủy tinh cao cấp Lumiarc'
+      },
+      {
+        code: 'gift1',
+        assetPath: '/imgs/tui-xach.png',
+        remain: 3,
+        showName: 'Bộ 5 túi đồ cho mẹ'
+      },
+      {
+        code: 'gift2',
+        assetPath: '/imgs/qua-newis.png',
+        remain: 6,
+        showName: '1 gói tã Newis trung'
+      },
+      {
+        code: 'gift3',
+        assetPath: '/imgs/mu-len.png',
+        remain: 30,
+        showName: 'Nón xinh cho bé'
+      },
+      {
+        code: 'gift4',
+        assetPath: '/imgs/khan-tre-em.png',
+        remain: 60,
+        showName: 'Lốc khăn sữa cao cấp'
+      }
+    ];
+
     this.vid.playbackRate = 1;
     this.vid.loop = true;
     this.vid.play();
 
     this.showLogo();
+  }
+
+  getRandomGift() {
+    let maxRemainingGifts: number = 0;
+    let cloneItemArray = this.itemArray.slice();
+    
+    cloneItemArray.sort((a, b) => {
+      return a.remain - b.remain;
+    });
+
+    maxRemainingGifts = cloneItemArray[cloneItemArray.length - 1].remain;
+
+    let randomNumber = Math.random() * maxRemainingGifts;
+
+    let chosenGift = cloneItemArray.find((item) => {
+      return item.remain >= randomNumber;
+    });
+
+    return this.itemArray.indexOf(chosenGift);
   }
 
   showLogo() {
