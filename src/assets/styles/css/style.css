@@ -88,6 +88,10 @@
   animation-play-state: paused !important;
 }
 
+#wrapper > div.step3-is-finished .gifts {
+  display: none;
+}
+
 @-webkit-keyframes movegifts {
   0% {margin-left: -1000px;}
   /*25% {margin-left: 1000px;}
@@ -161,12 +165,14 @@
   margin-top: -30%;
 }
 
-/*#heart-frame {
-  width: 50%;
-  position: absolute;
-  top: 30%;
-  left: 0;
-}*/
+#wrapper >div.step3-is-finished > .logo {
+  text-align: center;
+}
+
+#wrapper >div.step3-is-finished #logo {
+  width: initial;
+  margin-top: 0;
+}
 
 #logo{
     // position: absolute;

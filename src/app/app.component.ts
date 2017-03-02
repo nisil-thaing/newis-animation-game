@@ -40,18 +40,12 @@ export class AppComponent {
   _renderer: Renderer;
   lastGift: number = -1;
 
-  wheelState: any = {
-    '-webkit-animation': 'movegifts 5s linear infinite',
-    '-moz-animation': 'movegifts 5s linear infinite',
-    '-o-animation': 'movegifts 5s linear infinite'
-  };
-
   itemArray = [];
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     let keyCode = event.which || event.keyCode
-    if (keyCode === 13 || keyCode === 32) {
+    if (this.isFinished.step1 && !this.isFinished.step2 && (keyCode === 13 || keyCode === 32)) {
       this.key = keyCode;
 
       (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.left = "0";
@@ -73,6 +67,9 @@ export class AppComponent {
 
         setTimeout(() => {
           let refreshId = setInterval(() => {
+            heartLeft = document.querySelector(".heart #heart-frame").getBoundingClientRect().left;
+            heartRight = document.querySelector(".heart #heart-frame").getBoundingClientRect().right;
+
             let gift0Left = document.querySelector(".gifts #" + this.itemArray[this.randomGift].code).getBoundingClientRect().left;
             let gift0Right = document.querySelector(".gifts #" + this.itemArray[this.randomGift].code).getBoundingClientRect().right;
 
@@ -84,6 +81,14 @@ export class AppComponent {
 
               setTimeout(() => {
                 (document.getElementById(this.itemArray[this.randomGift].code).parentElement).style.left = ((oOfHeartFrame - oOfGift)) + "px";
+
+                setTimeout(() => {
+                  this.isFinished.step2 = true;
+
+                  setTimeout(() => {
+                    this.isFinished.step3 = true;
+                  }, 5000);
+                }, 5000);
               }, 500);
 
               this.lastGift = this.randomGift;
@@ -99,7 +104,7 @@ export class AppComponent {
         this.isGameStarted = false;
         this.isGamePaused = true;
 
-        alert("Het qua cmnr! Cut!");
+        alert("Quà cho ngày hôm nay đã hết, xin bạn vui lòng trở lại vào lần khác!");
       }
     }
   }
@@ -198,7 +203,23 @@ export class AppComponent {
     }, 1000);
   }
 
-  /*runGameStyle() {
-    return this.wheelState;
-  }*/
+  showFinalGift(item) {
+    if (!this.isGameStarted && !this.isFinished.step2) {
+      return {
+        'opacity': '0'
+      };
+    } else {
+      if (this.isGamePaused && this.isFinished.step2) {
+        if (item.code != this.itemArray[this.randomGift].code) {
+          return {
+            'opacity': '0'
+          };
+        } else {
+          return <any> {
+            'width': '300px'
+          };
+        }  
+      }
+    }
+  }
 }

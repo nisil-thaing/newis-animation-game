@@ -1,19 +1,15 @@
-<div [ngClass]="{ 'step1-is-finished': isFinished.step1 }">
-  <div class="logo" [ngClass]="{ 'col-sm-3 hidden-xs hidden-sm': isFinished.step1 }">
+<div [ngClass]="{ 'step1-is-finished': isFinished.step1, 'step2-is-finished': isFinished.step2, 'step3-is-finished': isFinished.step3 }">
+  <div class="logo" [ngClass]="{ 'col-sm-3 hidden-xs hidden-sm': isFinished.step1 && !isFinished.step3 }" [hidden]="isFinished.step2 && !isFinished.step3">
     <img [class]="logoClass" id="logo" src="{{ settings.assetsPath }}/imgs/newis-logo.png" *ngIf="step == 'showLogo'" />
   </div>
-  <div class="angel" [ngClass]="{ 'col-md-9 hidden-xs hidden-sm': isFinished.step1 }">
+  <div class="angel" [ngClass]="{ 'col-md-9 hidden-xs hidden-sm': isFinished.step1 }" [hidden]="isFinished.step2">
     <img [class]="whiteAngelClass" id="white-angel" src="{{ settings.assetsPath }}/imgs/white-angel.png" *ngIf="isFinished.step1">
   </div>
-  <div class="heart">
+  <div class="heart" [hidden]="isFinished.step2">
     <img [class]="heartFrameClass" id="heart-frame" src="{{ settings.assetsPath }}/imgs/heart-frame.png" *ngIf="isFinished.step1">
   </div>
   <div class="gifts" [ngClass]="{ 'paused': isGamePaused, 'stated': isGameStarted }">
-    <img *ngFor="let item of itemArray" id="{{ item.code }}" src="{{ settings.assetsPath + item.assetPath }}" [hidden]="!isGameStarted">
-    <!--<img id="gift0" src="{{ settings.assetsPath }}/imgs/bo-noi.png" [hidden]="!isGameStarted">
-    <img id="gift1" src="{{ settings.assetsPath }}/imgs/tui-xach.png" [hidden]="!isGameStarted">
-    <img id="gift2" src="{{ settings.assetsPath }}/imgs/qua-newis.png" [hidden]="!isGameStarted">
-    <img id="gift3" src="{{ settings.assetsPath }}/imgs/mu-len.png" [hidden]="!isGameStarted">
-    <img id="gift4" src="{{ settings.assetsPath }}/imgs/khan-tre-em.png" [hidden]="!isGameStarted">-->
+    <img *ngFor="let item of itemArray" id="{{ item.code }}" src="{{ settings.assetsPath + item.assetPath }}" [ngStyle]="showFinalGift(item)">
   </div>
+  <h1 [hidden]="!isFinished.step2 || isFinished.step3" style="text-align: center; color: red; text-transform: uppercase; position: absolute; bottom: 0"><b>Chúc mừng bạn đã may mắn nhận được món quà từ Newis</b></h1>
 </div>
