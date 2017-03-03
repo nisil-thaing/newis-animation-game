@@ -139,33 +139,48 @@ export class AppComponent {
           code: 'gift0',
           assetPath: '/imgs/bo-noi.png',
           remain: 1,
-          showName: 'Bộ nồi thủy tinh cao cấp Lumiarc'
+          showName: 'Bộ nồi thủy tinh cao cấp Lumiarc',
+          overTime: 0,
+          maxOverTime: 0
         },
         {
           code: 'gift1',
           assetPath: '/imgs/tui-xach.png',
           remain: 3,
-          showName: 'Bộ 5 túi đồ cho mẹ'
+          showName: 'Bộ 5 túi đồ cho mẹ',
+          overTime: 0,
+          maxOverTime: 0
         },
         {
           code: 'gift2',
           assetPath: '/imgs/qua-newis.png',
           remain: 6,
-          showName: '1 gói tã Newis trung'
+          showName: '1 gói tã Newis trung',
+          overTime: 0,
+          maxOverTime: 0
         },
         {
           code: 'gift3',
           assetPath: '/imgs/mu-len.png',
           remain: 30,
-          showName: 'Nón xinh cho bé'
+          showName: 'Nón xinh cho bé',
+          overTime: 0,
+          maxOverTime: 10
         },
         {
           code: 'gift4',
           assetPath: '/imgs/khan-tre-em.png',
           remain: 60,
-          showName: 'Lốc khăn sữa cao cấp'
+          showName: 'Lốc khăn sữa cao cấp',
+          overTime: 0,
+          maxOverTime: 10
         }
       ];
+
+      this.itemArray.forEach((item) => {
+        item.remain = item.remain - item.overTime;
+        item.overTime = 0;
+      });
 
       this.localStorageService.set('gift-items', JSON.stringify(this.itemArray));
     } else {
@@ -180,6 +195,19 @@ export class AppComponent {
 
       this.itemArray = arr;
       console.log(this.itemArray);
+    }
+
+    let giftRemaining = this.itemArray.filter((item) => {
+      return item.remain > 0;
+    });
+
+    if (giftRemaining.length === 0) {
+      this.itemArray.forEach((it) => {
+        if (it.remain === 0 && it.overTime < it.maxOverTime) {
+          it.remain++;
+          it.overTime++;
+        }
+      });
     }
 
     this.vid.playbackRate = 1;
