@@ -42,6 +42,7 @@ export class AppComponent {
   lastGift: number = -1;
 
   itemArray = [];
+  lastUpdated = '';
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -122,7 +123,17 @@ export class AppComponent {
   }
 
   constructor(private localStorageService: LocalStorageService) {
-    if (!this.localStorageService.get('gift-items')) {
+    let today = new Date();
+
+    if (!this.localStorageService.get('last-updated')) {
+      this.lastUpdated = today.toString();
+      this.localStorageService.set('last-updated', today);
+    } else {
+      this.lastUpdated = this.localStorageService.get('last-updated').toString();      
+    }
+
+    let lastUpdated = new Date(this.lastUpdated);
+    if ((lastUpdated.getDate() !== today.getDate() || lastUpdated.getMonth() !== today.getMonth() || lastUpdated.getFullYear() !== today.getFullYear()) || (!this.localStorageService.get('gift-items'))) {
       this.itemArray = [
         {
           code: 'gift0',
