@@ -8,7 +8,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 })
 export class AppComponent {
   settings = {
-    assetsPath: '../assets'
+    assetsPath: './assets'
   };
 
   vid: any = document.getElementById("my-audio");
