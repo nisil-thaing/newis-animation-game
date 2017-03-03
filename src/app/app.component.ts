@@ -1,4 +1,5 @@
 import { Component, HostListener, Renderer } from '@angular/core';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: '[app-root]',
@@ -65,6 +66,12 @@ export class AppComponent {
         this.isGameStarted = true;
         this.isGamePaused = false;
 
+        this.vid.volume = 0.75;
+        this.vid3.playbackRate = 1;
+        this.vid3.loop = true;
+        this.vid3.play();
+
+
         setTimeout(() => {
           let refreshId = setInterval(() => {
             heartLeft = document.querySelector(".heart #heart-frame").getBoundingClientRect().left;
@@ -85,15 +92,20 @@ export class AppComponent {
                 setTimeout(() => {
                   this.isFinished.step2 = true;
 
+                  this.vid3.pause();
+                  this.vid2.playbackRate = 1;
+                  this.vid2.play();
+
                   setTimeout(() => {
                     this.isFinished.step3 = true;
                   }, 5000);
-                }, 5000);
+                }, 1000);
               }, 500);
 
               this.lastGift = this.randomGift;
               this.itemArray[this.randomGift].remain--;
 
+              this.localStorageService.set('gift-items', JSON.stringify(this.itemArray));
               clearInterval(refreshId);
             } else {
               this.lastGift--;
@@ -109,39 +121,55 @@ export class AppComponent {
     }
   }
 
-  constructor() {
-    this.itemArray = [
-      {
-        code: 'gift0',
-        assetPath: '/imgs/bo-noi.png',
-        remain: 1,
-        showName: 'Bộ nồi thủy tinh cao cấp Lumiarc'
-      },
-      {
-        code: 'gift1',
-        assetPath: '/imgs/tui-xach.png',
-        remain: 3,
-        showName: 'Bộ 5 túi đồ cho mẹ'
-      },
-      {
-        code: 'gift2',
-        assetPath: '/imgs/qua-newis.png',
-        remain: 6,
-        showName: '1 gói tã Newis trung'
-      },
-      {
-        code: 'gift3',
-        assetPath: '/imgs/mu-len.png',
-        remain: 30,
-        showName: 'Nón xinh cho bé'
-      },
-      {
-        code: 'gift4',
-        assetPath: '/imgs/khan-tre-em.png',
-        remain: 60,
-        showName: 'Lốc khăn sữa cao cấp'
-      }
-    ];
+  constructor(private localStorageService: LocalStorageService) {
+    if (!this.localStorageService.get('gift-items')) {
+      this.itemArray = [
+        {
+          code: 'gift0',
+          assetPath: '/imgs/bo-noi.png',
+          remain: 1,
+          showName: 'Bộ nồi thủy tinh cao cấp Lumiarc'
+        },
+        {
+          code: 'gift1',
+          assetPath: '/imgs/tui-xach.png',
+          remain: 3,
+          showName: 'Bộ 5 túi đồ cho mẹ'
+        },
+        {
+          code: 'gift2',
+          assetPath: '/imgs/qua-newis.png',
+          remain: 6,
+          showName: '1 gói tã Newis trung'
+        },
+        {
+          code: 'gift3',
+          assetPath: '/imgs/mu-len.png',
+          remain: 30,
+          showName: 'Nón xinh cho bé'
+        },
+        {
+          code: 'gift4',
+          assetPath: '/imgs/khan-tre-em.png',
+          remain: 60,
+          showName: 'Lốc khăn sữa cao cấp'
+        }
+      ];
+
+      this.localStorageService.set('gift-items', JSON.stringify(this.itemArray));
+    } else {
+      let a = JSON.stringify(this.localStorageService.get('gift-items').toString());
+      a = a.replace(/\[/g,'');
+      a = a.replace(/\]/g,'');
+      a = a.replace(/\},/g, '}, ');
+      let strar = JSON.parse(a);
+      let arr = strar.split(', ');
+
+      arr = arr.map((item) => JSON.parse(item));
+
+      this.itemArray = arr;
+      console.log(this.itemArray);
+    }
 
     this.vid.playbackRate = 1;
     this.vid.loop = true;
