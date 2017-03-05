@@ -21,14 +21,14 @@
 }
 
 #wrapper {
-	// position: absolute;
-	// width: 100%;
-	// height: 100%;
+	/*position: absolute;
+	width: 100%;
+	height: 100%;*/
   height: 100vh;
   width: 100%;
   overflow: hidden;
   position: relative;
-	background: url("../../imgs/background.jpg") no-repeat center center fixed;
+	background: url("../../imgs/newis_bg.png") no-repeat center center fixed;
  	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
@@ -79,9 +79,9 @@
   display: inline-flex;
   align-items: center;
 
-  -webkit-animation: movegifts 2s linear infinite;
-  -moz-animation: movegifts 2s linear infinite;
-  -o-animation: movegifts 2s linear infinite;
+  -webkit-animation: movegifts 5s linear infinite;
+  -moz-animation: movegifts 5s linear infinite;
+  -o-animation: movegifts 5s linear infinite;
 }
 
 #wrapper > div.step1-is-finished .gifts.paused {
@@ -92,26 +92,44 @@
   display: none;
 }
 
+#alt-wallpaper {
+  z-index: 1000; 
+  position: absolute;
+  height: 100%;
+}
+
+/*@media(min-width: 992px) {
+  #alt-wallpaper {  
+    width: 100%;
+  }
+}
+
+@media(max-width: 992px) {
+  #alt-wallpaper {  
+    height: 100%;
+  }
+}*/
+
 @-webkit-keyframes movegifts {
-  0% {margin-left: -1000px;}
+  0% {margin-left: -800px;}
   /*25% {margin-left: 1000px;}
   50% {margin-left: 500px;}
   75% {margin-left: 250px;}*/
-  100% {margin-left: 2000px;}
+  100% {margin-left: 600px;}
 }
 @-moz-keyframes movegifts {
-  0% {margin-left: -1000px;}
+  0% {margin-left: -800px;}
   /*25% {margin-left: 1000px;}
   50% {margin-left: 500px;}
   75% {margin-left: 250px;}*/
-  100% {margin-left: 2000px;}
+  100% {margin-left: 800px;}
 }
 @-o-keyframes movegifts {
-  0% {margin-left: -1000px;}
+  0% {margin-left: -800px;}
   /*25% {margin-left: 1000px;}
   50% {margin-left: 500px;}
   75% {margin-left: 250px;}*/
-  100% {margin-left: 2000px;}
+  100% {margin-left: 600px;}
 }
 
 #wrapper > div.step1-is-finished .angel #white-angel {
@@ -125,15 +143,15 @@
 #wrapper > div.step1-is-finished .heart #heart-frame {
   position: absolute;
   top: 50%;
-  // left: 0;
+  /*left: 0;*/
   height: auto;
-  // transform: translateY(-50%) !important;
+  /*transform: translateY(-50%) !important;*/
 }
 
 @media(max-width: 991px) {
   #wrapper > div.step1-is-finished .heart #heart-frame {
-    left: 50%;
-    max-width: 480px;
+    left: 410px;
+    max-width: 370px;
     transform: translate(-50%, -50%) !important;
   }
 
@@ -144,8 +162,8 @@
 
 @media(min-width: 992px) {
   #wrapper > div.step1-is-finished .heart #heart-frame {
-    left: 0;
-    max-width: 768px;
+    left: 140px;
+    max-width: 520px;
     transform: translateY(-50%) !important;
   }
 

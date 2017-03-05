@@ -127,10 +127,11 @@ export class AppComponent {
 
     if (!this.localStorageService.get('last-updated')) {
       this.lastUpdated = today.toString();
-      this.localStorageService.set('last-updated', today);
     } else {
       this.lastUpdated = this.localStorageService.get('last-updated').toString();      
     }
+
+    this.localStorageService.set('last-updated', today);
 
     let lastUpdated = new Date(this.lastUpdated);
     if ((lastUpdated.getDate() !== today.getDate() || lastUpdated.getMonth() !== today.getMonth() || lastUpdated.getFullYear() !== today.getFullYear()) || (!this.localStorageService.get('gift-items'))) {
