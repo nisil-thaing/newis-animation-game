@@ -83,6 +83,7 @@ export class AppComponent {
 
             if (gift0Left > heartLeft + ((heartRight - heartLeft) / 4) && gift0Right < heartRight - ((heartRight - heartLeft) / 4) && this.randomGift > this.lastGift) {
               this.isGamePaused = true;
+              this.isGameStarted = false;
 
               let oOfHeartFrame = (heartRight + heartLeft) / 2;
               let oOfGift = (gift0Right + gift0Left) / 2;
@@ -123,6 +124,42 @@ export class AppComponent {
   }
 
   constructor(private localStorageService: LocalStorageService) {
+    window.addEventListener('resize', () => {
+      let w: number = window.innerWidth;
+      let h: number = window.innerHeight;
+      let altimgw: number = document.getElementById('alt-wallpaper').offsetWidth;
+      let altimgh: number = document.getElementById('alt-wallpaper').offsetHeight;
+
+      if (altimgw/altimgh >= w/h) {
+        document.getElementById('alt-wallpaper').style.width = 'auto';
+        document.getElementById('alt-wallpaper').style.height = '100%';
+      } else {
+        document.getElementById('alt-wallpaper').style.height = 'auto';
+        document.getElementById('alt-wallpaper').style.width = '100%';
+      }
+    });
+
+    window.addEventListener('load', () => {
+      let reloadId = setInterval(() => {
+        if (this.isFinished.step1) {
+          let w: number = window.innerWidth;
+          let h: number = window.innerHeight;
+          let altimgw: number = document.getElementById('alt-wallpaper').offsetWidth;
+          let altimgh: number = document.getElementById('alt-wallpaper').offsetHeight;
+
+          if (altimgw/altimgh >= w/h) {
+            document.getElementById('alt-wallpaper').style.width = 'auto';
+            document.getElementById('alt-wallpaper').style.height = '100%';
+          } else {
+            document.getElementById('alt-wallpaper').style.height = 'auto';
+            document.getElementById('alt-wallpaper').style.width = '100%';
+          }
+
+          clearInterval(reloadId);
+        }
+      }, 1);
+    });
+
     let today = new Date();
 
     if (!this.localStorageService.get('last-updated')) {
