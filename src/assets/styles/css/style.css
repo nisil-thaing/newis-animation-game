@@ -84,6 +84,18 @@
   -o-animation: movegifts 5s linear infinite;
 }
 
+#wrapper > div.step1-is-finished .gifts.started {
+  -webkit-animation: movegifts 5s linear infinite;
+  -moz-animation: movegifts 5s linear infinite;
+  -o-animation: movegifts 5s linear infinite;
+}
+
+/*#wrapper > div.step1-is-finished .gifts.pausing {
+  -webkit-animation: movegifts 7s linear infinite;
+  -moz-animation: movegifts 7s linear infinite;
+  -o-animation: movegifts 7s linear infinite;
+}*/
+
 #wrapper > div.step1-is-finished .gifts.paused {
   animation-play-state: paused !important;
 }
@@ -134,7 +146,7 @@
 
 #wrapper > div.step1-is-finished .angel #white-angel {
   width: auto;
-  max-height: 200px;
+  max-height: 300px;
   position: absolute;
   right: 120px;
   bottom: 100px;
@@ -196,16 +208,16 @@
   margin-top: 0;
 }
 
-#logo{
-    // position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // transform: translate(-50%, -50%);
-    // top: 39%;
-    // left: 27%;
-    // width: 31%;
-    // height: 100%;
-}
+/*#logo{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 39%;
+    left: 27%;
+    width: 31%;
+    height: 100%;
+}*/
 
 .logo_zoomout_default{
   transform: scale3d(0, 0,1) !important;

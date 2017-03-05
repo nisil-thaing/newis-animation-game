@@ -44,35 +44,47 @@ export class AppComponent {
   itemArray = [];
   lastUpdated = '';
 
+  gameState: number = 0;
+
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     let keyCode = event.which || event.keyCode
     if (this.isFinished.step1 && !this.isFinished.step2 && (keyCode === 13 || keyCode === 32)) {
       this.key = keyCode;
 
-      (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.left = "0";
+      this.gameState++;
 
       let heartLeft = document.querySelector(".heart #heart-frame").getBoundingClientRect().left;
       let heartRight = document.querySelector(".heart #heart-frame").getBoundingClientRect().right;
 
-      this.randomGift = Math.floor(Math.random() * 5);
-      let giftRemaining = this.itemArray.filter((item) => {
-        return item.remain > 0;
-      });
+      if (this.gameState === 1) {
+        (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.left = "0";
 
-      if (giftRemaining.length > 0) {
+        this.randomGift = Math.floor(Math.random() * 5);
+        let giftRemaining = this.itemArray.filter((item) => {
+          return item.remain > 0;
+        });
 
-        this.randomGift = this.getRandomGift();
+        if (giftRemaining.length > 0) {
 
-        this.isGameStarted = true;
-        this.isGamePaused = false;
+          this.randomGift = this.getRandomGift();
 
-        this.vid.volume = 0.75;
-        this.vid3.playbackRate = 1;
-        this.vid3.loop = true;
-        this.vid3.play();
+          this.isGameStarted = true;
+          this.isGamePaused = false;
 
+          this.vid.volume = 0.75;
+          this.vid3.playbackRate = 1;
+          this.vid3.loop = true;
+          this.vid3.play();
+        } else {
+          this.isGameStarted = false;
+          this.isGamePaused = true;
 
+          alert("Quà cho ngày hôm nay đã hết, xin bạn vui lòng trở lại vào lần khác!");
+        }
+      }
+
+      if (this.gameState === 2) {
         setTimeout(() => {
           let refreshId = setInterval(() => {
             heartLeft = document.querySelector(".heart #heart-frame").getBoundingClientRect().left;
@@ -83,7 +95,6 @@ export class AppComponent {
 
             if (gift0Left > heartLeft + ((heartRight - heartLeft) / 4) && gift0Right < heartRight - ((heartRight - heartLeft) / 4) && this.randomGift > this.lastGift) {
               this.isGamePaused = true;
-              this.isGameStarted = false;
 
               let oOfHeartFrame = (heartRight + heartLeft) / 2;
               let oOfGift = (gift0Right + gift0Left) / 2;
@@ -101,7 +112,7 @@ export class AppComponent {
                   setTimeout(() => {
                     this.isFinished.step3 = true;
                   }, 5000);
-                }, 1000);
+                }, 2000);
               }, 500);
 
               this.lastGift = this.randomGift;
@@ -114,11 +125,6 @@ export class AppComponent {
             }
           }, 1);
         }, 5000);
-      } else {
-        this.isGameStarted = false;
-        this.isGamePaused = true;
-
-        alert("Quà cho ngày hôm nay đã hết, xin bạn vui lòng trở lại vào lần khác!");
       }
     }
   }
