@@ -90,11 +90,11 @@
   -o-animation: movegifts 5s linear infinite;
 }
 
-/*#wrapper > div.step1-is-finished .gifts.pausing {
+#wrapper > div.step1-is-finished .gifts.pausing {
   -webkit-animation: movegifts 7s linear infinite;
   -moz-animation: movegifts 7s linear infinite;
   -o-animation: movegifts 7s linear infinite;
-}*/
+}
 
 #wrapper > div.step1-is-finished .gifts.paused {
   animation-play-state: paused !important;

@@ -9,7 +9,7 @@
   <div class="heart" [hidden]="isFinished.step2" style="opacity: 0">
     <img [class]="heartFrameClass" id="heart-frame" src="{{ settings.assetsPath }}/imgs/heart-frame.png" *ngIf="isFinished.step1">
   </div>
-  <div class="gifts" [ngClass]="{ 'paused': isGamePaused && gameState >= 2, 'started': isGameStarted && !isGamePaused, 'pausing': gameState >= 2 && !isGamePaused }">
+  <div class="gifts" [ngClass]="{ 'paused': isGamePaused, 'started': isGameStarted && !isGamePaused, 'pausing': gameState >= 2 }">
     <img *ngFor="let item of itemArray" id="{{ item.code }}" src="{{ settings.assetsPath + item.assetPath }}" [ngStyle]="showFinalGift(item)">
   </div>
   <h1 [hidden]="!isFinished.step2 || isFinished.step3" style="font-family: avo; text-align: center; color: #fff; text-transform: uppercase; position: absolute; bottom: 0; width: 100%;"><b>Chúc mừng bạn đã may mắn nhận được món quà từ Newis</b></h1>
