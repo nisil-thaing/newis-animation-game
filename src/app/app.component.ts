@@ -105,8 +105,8 @@ export class AppComponent {
                 setTimeout(() => {
                   this.isFinished.step2 = true;
 
-                  var parentLeftValue = Math.abs(document.getElementsByClassName('gifts')[0].getBoundingClientRect().right);
-                  (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.left = parentLeftValue + 'px';
+                  (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.left = '0';
+                  (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.animation = 'none';                  
 
                   this.vid3.pause();
                   this.vid2.playbackRate = 1;
@@ -127,7 +127,7 @@ export class AppComponent {
               this.lastGift--;
             }
           }, 1);
-        }, 5000);
+        }, 1000);
       }
     }
   }
@@ -410,7 +410,11 @@ export class AppComponent {
           };
         } else {
           return <any>{
-            'width': '400px'
+            'width': '400px',
+            'position': 'absolute',
+            'margin': '0',
+            'left': '50%',
+            'transform': 'translateX(-50%)'
           };
         }
       }
