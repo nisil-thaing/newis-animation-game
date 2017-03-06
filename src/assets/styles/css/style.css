@@ -132,21 +132,21 @@
   /*25% {margin-left: 1000px;}
   50% {margin-left: 500px;}
   75% {margin-left: 250px;}*/
-  100% {margin-left: 600px;}
+  100% {margin-left: 400px;}
 }
 @-moz-keyframes movegifts {
   0% {margin-left: -2000px;}
   /*25% {margin-left: 1000px;}
   50% {margin-left: 500px;}
   75% {margin-left: 250px;}*/
-  100% {margin-left: 800px;}
+  100% {margin-left: 400px;}
 }
 @-o-keyframes movegifts {
   0% {margin-left: -2000px;}
   /*25% {margin-left: 1000px;}
   50% {margin-left: 500px;}
   75% {margin-left: 250px;}*/
-  100% {margin-left: 600px;}
+  100% {margin-left: 400px;}
 }
 
 #wrapper > div.step1-is-finished .angel #white-angel {
