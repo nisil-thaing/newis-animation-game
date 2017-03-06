@@ -20,6 +20,11 @@
     src: url(../fonts/kunmedii.ttf);
 }
 
+@font-face {
+  font-family: 'Avo';
+  src: url('../../fonts/avo/UTM_AVO.TTF');
+}
+
 #wrapper {
 	/*position: absolute;
 	width: 100%;
