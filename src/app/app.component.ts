@@ -105,6 +105,9 @@ export class AppComponent {
                 setTimeout(() => {
                   this.isFinished.step2 = true;
 
+                  var parentLeftValue = Math.abs(document.getElementsByClassName('gifts')[0].getBoundingClientRect().right);
+                  (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.left = parentLeftValue + 'px';
+
                   this.vid3.pause();
                   this.vid2.playbackRate = 1;
                   this.vid2.play();
@@ -327,7 +330,7 @@ export class AppComponent {
           };
         } else {
           return <any> {
-            'width': '300px'
+            'width': '400px'
           };
         }  
       }
