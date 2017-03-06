@@ -138,13 +138,53 @@ export class AppComponent {
       let h: number = window.innerHeight;
       let altimgw: number = document.getElementById('alt-wallpaper').offsetWidth;
       let altimgh: number = document.getElementById('alt-wallpaper').offsetHeight;
+      let heartw: number = document.getElementById('heart-frame').offsetWidth;
+      let hearth: number = document.getElementById('heart-frame').offsetHeight;
 
-      if (altimgw/altimgh >= w/h) {
+      if (altimgw / altimgh >= w / h) { // small view
         document.getElementById('alt-wallpaper').style.width = 'auto';
         document.getElementById('alt-wallpaper').style.height = '100%';
-      } else {
+      } else { // big view
         document.getElementById('alt-wallpaper').style.height = 'auto';
         document.getElementById('alt-wallpaper').style.width = '100%';
+      }
+
+      if (w >= 850 && h >= 750) {
+        if (w / h < 850 / 750) {
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.height = '70%';
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.width = 'auto';
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.top = '0px';
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.left = '0px';
+          for (let i = 0; i < document.querySelectorAll('.gifts img').length; i++) {
+            (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '200px';
+          }
+        } else {
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.height = '100%';
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.width = 'auto';
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.top = '-35px';
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.left = '-90px';
+          for (let i = 0; i < document.querySelectorAll('.gifts img').length; i++) {
+            (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '300px';
+          }
+        }
+      } else {
+        if (w / h < 850 / 750) {
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.height = '70%';
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.width = 'auto';
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.top = '0px';
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.left = '0px';
+          for (let i = 0; i < document.querySelectorAll('.gifts img').length; i++) {
+            (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '200px';
+          }
+        } else {
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.height = '100%';
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.width = 'auto';
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.top = '-25px';
+          (<HTMLElement>document.querySelector('.heart #heart-frame')).style.left = '-65px';
+          for (let i = 0; i < document.querySelectorAll('.gifts img').length; i++) {
+            (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '300px';
+          }
+        }
       }
     });
 
@@ -155,13 +195,53 @@ export class AppComponent {
           let h: number = window.innerHeight;
           let altimgw: number = document.getElementById('alt-wallpaper').offsetWidth;
           let altimgh: number = document.getElementById('alt-wallpaper').offsetHeight;
+          let heartw: number = document.getElementById('heart-frame').offsetWidth;
+          let hearth: number = document.getElementById('heart-frame').offsetHeight;
 
-          if (altimgw/altimgh >= w/h) {
+          if (altimgw / altimgh >= w / h) {
             document.getElementById('alt-wallpaper').style.width = 'auto';
             document.getElementById('alt-wallpaper').style.height = '100%';
           } else {
             document.getElementById('alt-wallpaper').style.height = 'auto';
             document.getElementById('alt-wallpaper').style.width = '100%';
+          }
+
+          if (w >= 850 && h >= 750) {
+            if (w / h < 850 / 750) {
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.height = '70%';
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.width = 'auto';
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.top = '0px';
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.left = '0px';
+              for (let i = 0; i < document.querySelectorAll('.gifts img').length; i++) {
+                (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '200px';
+              }
+            } else {
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.height = '100%';
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.width = 'auto';
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.top = '-35px';
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.left = '-90px';
+              for (let i = 0; i < document.querySelectorAll('.gifts img').length; i++) {
+                (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '300px';
+              }
+            }
+          } else {
+            if (w / h < 850 / 750) {
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.height = '70%';
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.width = 'auto';
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.top = '0px';
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.left = '0px';
+              for (let i = 0; i < document.querySelectorAll('.gifts img').length; i++) {
+                (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '200px';
+              }
+            } else {
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.height = '100%';
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.width = 'auto';
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.top = '-25px';
+              (<HTMLElement>document.querySelector('.heart #heart-frame')).style.left = '-65px';
+              for (let i = 0; i < document.querySelectorAll('.gifts img').length; i++) {
+                (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '300px';
+              }
+            }
           }
 
           clearInterval(reloadId);
@@ -174,7 +254,7 @@ export class AppComponent {
     if (!this.localStorageService.get('last-updated')) {
       this.lastUpdated = today.toString();
     } else {
-      this.lastUpdated = this.localStorageService.get('last-updated').toString();      
+      this.lastUpdated = this.localStorageService.get('last-updated').toString();
     }
 
     this.localStorageService.set('last-updated', today);
@@ -232,8 +312,8 @@ export class AppComponent {
       this.localStorageService.set('gift-items', JSON.stringify(this.itemArray));
     } else {
       let a = JSON.stringify(this.localStorageService.get('gift-items').toString());
-      a = a.replace(/\[/g,'');
-      a = a.replace(/\]/g,'');
+      a = a.replace(/\[/g, '');
+      a = a.replace(/\]/g, '');
       a = a.replace(/\},/g, '}, ');
       let strar = JSON.parse(a);
       let arr = strar.split(', ');
@@ -267,7 +347,7 @@ export class AppComponent {
   getRandomGift() {
     let maxRemainingGifts: number = 0;
     let cloneItemArray = this.itemArray.slice();
-    
+
     cloneItemArray.sort((a, b) => {
       return a.remain - b.remain;
     });
@@ -329,10 +409,10 @@ export class AppComponent {
             'opacity': '0'
           };
         } else {
-          return <any> {
+          return <any>{
             'width': '400px'
           };
-        }  
+        }
       }
     }
   }

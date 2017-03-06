@@ -170,33 +170,33 @@
 }
 
 @media(max-width: 991px) {
-  #wrapper > div.step1-is-finished .heart #heart-frame {
+  /*#wrapper > div.step1-is-finished .heart #heart-frame {
     left: 410px;
     max-width: 370px;
     transform: translate(-50%, -50%) !important;
-  }
+  }*/
 
   #wrapper > div.step1-is-finished .gifts > img {
-    width: 150px;
+    /*width: 150px;*/
   }
 }
 
 @media(min-width: 992px) {
-  #wrapper > div.step1-is-finished .heart #heart-frame {
+  /*#wrapper > div.step1-is-finished .heart #heart-frame {
     left: 140px;
     max-width: 520px;
     transform: translateY(-50%) !important;
-  }
+  }*/
 
   #wrapper > div.step1-is-finished .gifts > img {
-    width: 210px;
+    /*width: 210px;*/
   }
 }
 
 @media(min-width: 1171px) {
-  #wrapper > div.step1-is-finished .heart #heart-frame {
+  /*#wrapper > div.step1-is-finished .heart #heart-frame {
     left: 10%;
-  }
+  }*/
 }
 
 #wrapper >div.step1-is-finished #logo {

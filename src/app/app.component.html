@@ -1,5 +1,5 @@
 <div [ngClass]="{ 'step1-is-finished': isFinished.step1, 'step2-is-finished': isFinished.step2, 'step3-is-finished': isFinished.step3 }">
-  <img id="alt-wallpaper" src="{{ settings.assetsPath }}/imgs/newis_bg_no_heart.png" [hidden]="!isFinished.step1 || isFinished.step2">
+  <img id="alt-wallpaper" src="{{ settings.assetsPath }}/imgs/newis_bg_new.png" [hidden]="!isFinished.step1 || isFinished.step2">
   <div class="logo" [ngClass]="{ 'col-sm-3 hidden-xs hidden-sm': isFinished.step1 && !isFinished.step3 }" [hidden]="isFinished.step2 && !isFinished.step3" style="z-index: 1001">
     <img [class]="logoClass" id="logo" src="{{ settings.assetsPath }}/imgs/newis-logo.png" *ngIf="step == 'showLogo'" />
   </div>
