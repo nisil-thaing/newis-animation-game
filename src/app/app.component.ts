@@ -34,6 +34,10 @@ export class AppComponent {
 
   key: number;
 
+  gameMode: any = {
+    isTrial: false
+  };
+
   isGameStarted: boolean = false;
 
   randomGift: number = 0;
@@ -48,7 +52,7 @@ export class AppComponent {
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    let keyCode = event.which || event.keyCode
+    let keyCode = event.which || event.keyCode;
     if (this.isFinished.step1 && !this.isFinished.step2 && (keyCode === 13 || keyCode === 32)) {
       this.key = keyCode;
 
@@ -58,17 +62,35 @@ export class AppComponent {
       let heartRight = document.querySelector(".heart #heart-frame").getBoundingClientRect().right;
 
       if (this.gameState === 1) {
+        this.gameMode.isTrial = (this.key === 13);
+
         (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.left = "0";
 
         this.randomGift = Math.floor(Math.random() * 5);
-        let giftRemaining = this.itemArray.filter((item) => {
-          return item.remain > 0;
-        });
 
-        if (giftRemaining.length > 0) {
+        if (!this.gameMode.isTrial) {
+          let giftRemaining = this.itemArray.filter((item) => {
+            return item.remain > 0;
+          });
 
-          this.randomGift = this.getRandomGift();
+          if (giftRemaining.length > 0) {
 
+            this.randomGift = this.getRandomGift();
+
+            this.isGameStarted = true;
+            this.isGamePaused = false;
+
+            this.vid.volume = 0.75;
+            this.vid3.playbackRate = 1;
+            this.vid3.loop = true;
+            this.vid3.play();
+          } else {
+            this.isGameStarted = false;
+            this.isGamePaused = true;
+
+            alert("Quà cho ngày hôm nay đã hết, xin bạn vui lòng trở lại vào lần khác!");
+          }
+        } else {
           this.isGameStarted = true;
           this.isGamePaused = false;
 
@@ -76,11 +98,6 @@ export class AppComponent {
           this.vid3.playbackRate = 1;
           this.vid3.loop = true;
           this.vid3.play();
-        } else {
-          this.isGameStarted = false;
-          this.isGamePaused = true;
-
-          alert("Quà cho ngày hôm nay đã hết, xin bạn vui lòng trở lại vào lần khác!");
         }
       }
 
@@ -106,14 +123,14 @@ export class AppComponent {
                   this.isFinished.step2 = true;
 
                   (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.left = '0';
-                  (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.animation = 'none';                  
+                  (<HTMLElement>document.getElementsByClassName('gifts')[0]).style.animation = 'none';
 
                   this.vid3.pause();
                   this.vid2.playbackRate = 1;
                   this.vid2.play();
 
                   setTimeout(() => {
-                    this.isFinished.step3 = true;
+                    // this.isFinished.step3 = true;
                   }, 5000);
                 }, 2000);
               }, 500);
@@ -121,7 +138,9 @@ export class AppComponent {
               this.lastGift = this.randomGift;
               this.itemArray[this.randomGift].remain--;
 
-              this.localStorageService.set('gift-items', JSON.stringify(this.itemArray));
+              if (!this.gameMode.isTrial) {
+                this.localStorageService.set('gift-items', JSON.stringify(this.itemArray))
+              };
               clearInterval(refreshId);
             } else {
               this.lastGift--;
@@ -164,7 +183,7 @@ export class AppComponent {
           (<HTMLElement>document.querySelector('.heart #heart-frame')).style.top = '-35px';
           (<HTMLElement>document.querySelector('.heart #heart-frame')).style.left = '-90px';
           for (let i = 0; i < document.querySelectorAll('.gifts img').length; i++) {
-            (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '300px';
+            (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '250px';
           }
         }
       } else {
@@ -182,7 +201,7 @@ export class AppComponent {
           (<HTMLElement>document.querySelector('.heart #heart-frame')).style.top = '-25px';
           (<HTMLElement>document.querySelector('.heart #heart-frame')).style.left = '-65px';
           for (let i = 0; i < document.querySelectorAll('.gifts img').length; i++) {
-            (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '300px';
+            (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '250px';
           }
         }
       }
@@ -221,7 +240,7 @@ export class AppComponent {
               (<HTMLElement>document.querySelector('.heart #heart-frame')).style.top = '-35px';
               (<HTMLElement>document.querySelector('.heart #heart-frame')).style.left = '-90px';
               for (let i = 0; i < document.querySelectorAll('.gifts img').length; i++) {
-                (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '300px';
+                (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '250px';
               }
             }
           } else {
@@ -239,7 +258,7 @@ export class AppComponent {
               (<HTMLElement>document.querySelector('.heart #heart-frame')).style.top = '-25px';
               (<HTMLElement>document.querySelector('.heart #heart-frame')).style.left = '-65px';
               for (let i = 0; i < document.querySelectorAll('.gifts img').length; i++) {
-                (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '300px';
+                (<HTMLElement>document.querySelectorAll('.gifts img')[i]).style.width = '250px';
               }
             }
           }

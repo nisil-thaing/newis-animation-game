@@ -12,5 +12,5 @@
   <div class="gifts" [ngClass]="{ 'paused': isGamePaused, 'started': isGameStarted && !isGamePaused, 'pausing': gameState >= 2 }">
     <img *ngFor="let item of itemArray" id="{{ item.code }}" src="{{ settings.assetsPath + item.assetPath }}" [ngStyle]="showFinalGift(item)">
   </div>
-  <h1 [hidden]="!isFinished.step2 || isFinished.step3" style="font-family: avo; text-align: center; background-color: #fff; text-transform: uppercase; position: absolute; bottom: 0; width: 100%; padding: 15px; color: blue;"><b>Chúc mừng bạn đã may mắn nhận được món quà từ Newis</b></h1>
+  <h1 [hidden]="!isFinished.step2 || isFinished.step3" style="font-family: avo; text-align: center; -webkit-text-stroke: 2px#fff; text-transform: uppercase; position: absolute; bottom: 0; width: 100%; padding: 15px; color: blue;"><b>Chúc mừng bạn đã may mắn nhận được món quà từ Newis</b></h1>
 </div>
