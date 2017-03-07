@@ -130,7 +130,7 @@ export class AppComponent {
                   this.vid2.play();
 
                   setTimeout(() => {
-                    // this.isFinished.step3 = true;
+                    this.isFinished.step3 = true;
                   }, 5000);
                 }, 2000);
               }, 500);
